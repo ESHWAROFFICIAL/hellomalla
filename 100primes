@@ -1,0 +1,100 @@
+<h1> First 100 Prime Numbers</h1>
+
+<div class="container prime"></div>
+
+
+
+
+
+html
+
+
+
+
+body{
+  margin-left:10%;
+  margin-right:10px;
+ margin-bottom:5%;
+  background:aqua;
+}
+
+h6{
+  margin-top:5px;
+}
+div{
+  margin-bottom:20px;
+}
+h1{
+  text-align:Center;
+  color:Black;
+  font-size: 2em;
+  font-family:Arial;
+}
+ul{
+  list-style:none;
+}
+li{
+  float:left;
+  border: 1px solid black;
+ 
+  font-size: 2em;
+  font-family:Franklin Gothic;
+   text-align:center;
+}
+
+li:nth-child(odd) {
+    background:azure;
+   width:10%;
+   
+}
+li:nth-child(even) {
+    background:green;
+    width:10%;
+}
+
+
+
+
+
+
+css
+
+
+
+
+
+$(document).ready(function (){
+  var output = "<div><ul>";
+var prime = [];
+const n = 542;
+for (let i = 0; i < n; i++) {
+    prime.push(true);
+
+}
+for (let p = 2; p * p <= n; p++) {
+
+
+    if (prime[p] == true) {
+
+        for (let i = p + p; i <= n; i += p)
+            prime[i] = false;
+       
+    }
+}
+
+for (let i = 2; i <= n; i++) {
+    if (prime[i])
+       output += "<li>"+i  +"</li>";
+
+}
+
+  output += "</ul>";
+  output += "</div>"
+$('.prime').append(output);
+
+});
+
+
+
+
+js
