@@ -1,0 +1,77 @@
+- let x=10, y=10, delay=10000;
+	while y--
+		.row
+			- for(let i = 0; i < x; i++)
+				img.c(
+					style=`background: url('https://thiscatdoesnotexist.com/?i=${i}') 0 0 no-repeat; background-size: cover; background-attachment: fixed`
+				)
+				//img.c(src=`https://thiscatdoesnotexist.com/?i=${i}`)
+			- for(let d = 0; d < delay; d++) // do a big loop to simulate delay
+
+
+
+
+
+
+html pug
+
+
+
+
+/* Reveal the intruder cat! None of these AI generated cats were harmed as they do not exist :) */
+$rn: random(5);
+$delay: 2s;
+$size: 60px;
+
+body {
+	background: url("https://thiscatdoesnotexist.com/?i=2") center center no-repeat;
+	background-size: cover;
+	height: 100vh;
+	flex-direction: column;
+	overflow: hidden;
+}
+body,
+div {
+	display: flex;
+	justify-content: space-evenly;
+}
+div {
+	overflow: visible;
+}
+.row {
+	align-items: center;
+	position: relative;
+}
+.c {
+	align-items: center;
+	animation: 1s ease-in-out $rn + s /* <- random number delay to start */
+		infinite alternate-reverse both a;
+	clip-path: circle(50%);
+	height: $size;
+	width: $size;
+}
+.c:hover {
+	background-attachment: scroll !important;
+	background-position: center center !important;
+	background-size: cover !important;
+	cursor: pointer;
+	transform: scale(20);
+	overflow: visible !important;
+	position: relative;
+	z-index: 1;
+}
+
+@keyframes a {
+	0% {
+		clip-path: circle(10%);
+	}
+	100% {
+		clip-path: circle(40%);
+	}
+}
+
+
+
+
+
+css
