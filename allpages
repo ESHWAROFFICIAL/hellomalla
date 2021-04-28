@@ -1,0 +1,141 @@
+  <h1> Check out these cool sites</h1>
+<div class="is-grid is-tile">
+
+    <div class="item-wrap">
+      
+        <div class="item">
+            <div class="item-preview-wrap">
+                <a class="item-preview" style="background-image:url(https://i.imgur.com/dk3HtM3.png)"></a>
+              <div class="label">Mash Media</div>
+            </div>
+        </div>
+    </div>
+  <div class="item-wrap">
+      
+        <div class="item">
+            <div class="item-preview-wrap">
+                <a class="item-preview" style="background-image:url(https://i.imgur.com/ht5BMTh.jpg)"></a>
+              <div class="label">Megadeck Staging</div>
+            </div>
+        </div>
+    </div>
+  <div class="item-wrap">
+      
+        <div class="item">
+            <div class="item-preview-wrap">
+                <a class="item-preview" style="background-image:url(https://i.imgur.com/xloaeFq.jpg)"></a>
+              <div class="label">Parry's Carpets</div>
+            </div>
+        </div>
+    </div>
+  <div class="item-wrap">
+      
+        <div class="item">
+            <div class="item-preview-wrap">
+                <a class="item-preview" style="background-image:url(https://i.imgur.com/8FTh6j8.jpg)"></a>
+              <div class="label">Advanced Pest Control</div>
+            </div>
+        </div>
+    </div>
+  <div class="item-wrap">
+      
+        <div class="item">
+            <div class="item-preview-wrap">
+                <a class="item-preview" style="background-image:url(https://i.imgur.com/En7QF1v.jpg)"></a>
+              <div class="label">MGM Martin</div>
+            </div>
+        </div>
+    </div>
+  <div class="item-wrap">
+      
+        <div class="item">
+            <div class="item-preview-wrap">
+                <a class="item-preview" style="background-image:url(https://i.imgur.com/Ghyd4wY.jpg)"></a>
+              <div class="label">Cosmedica Australia</div>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  html
+  
+  
+  
+  
+  .item-preview-wrap {
+  position: relative;
+  background: #333;
+  border-radius: 15px;
+}
+.item-wrap {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  max-width: 200px;
+}
+.is-tile .item-preview {
+  -webkit-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
+  background-color: #e4e9f2;
+  background-size: cover;
+  background-position: center 0;
+  height: 0;
+  padding-top: 100%;
+  border-radius: 0px;
+}
+.is-tile .item-preview:hover {
+  background-position: center 100%;
+ -webkit-transition: all 2.5s ease-in-out;
+  transition: all 2.5s ease-in-out;
+}
+.is-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: row;
+      flex-wrap: row;
+  height: 100%;
+  flex-flow: row wrap;
+}
+.item-preview {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.is-grid .item {
+  width: 100%;
+  display: inline-block;
+  padding: 20px;
+  text-align: center;
+}
+/*  don't copy for demo only*/
+html{
+  background: black;
+  color: white;
+}
+
+h1{
+  text-align: center;
+}
+
+
+
+
+
+
+css
