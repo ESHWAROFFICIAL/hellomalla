@@ -1,0 +1,102 @@
+<body>
+  <div class="repetition"></div>
+</body>
+
+
+
+
+html
+
+
+
+
+html {
+  background: #ae874c;
+}
+
+body {
+  margin: 0 auto;
+  background: #1d2633;
+  background: #ae874c;
+  padding: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(3.9rem, 1fr));
+  overflow: hidden;
+}
+.repetition {
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border-bottom: 0;
+  border-left: 8rem solid transparent;
+  border-bottom: 10rem solid rgb(83, 120, 90);
+  border-left: 4rem solid transparent;
+  border-bottom: 4rem solid rgb(83, 120, 90);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+@media (max-width: 1124px) {
+  body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(3.8rem, 1fr));
+}
+  
+@media (max-width: 668px) {
+  body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(3.75rem, 1fr));
+}
+  
+@media (max-width: 540px) {
+  body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(3.7rem, 1fr));
+}
+@media (max-width: 475px) {
+  body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(3.685rem, 1fr));
+}
+
+
+
+
+
+
+css
+
+
+
+
+
+const body = document.querySelector("body");
+const width = body.clientWidth;
+const height = body.clientHeight;
+console.log(width, height);
+
+function buildPattern(ceiling) {
+  if (ceiling > 300) {
+    return; // bail
+  }
+  // generate pattern
+  for (var i = 0; i < ceiling; i++) {
+    // 120 wide by 112 tall
+    const squareArea = 120;
+    const patternItem = document.createElement("div");
+  patternItem.setAttribute("class", "repetition");
+    let calc = i * squareArea; // 1x120, 2x120, 3x120 ...
+    body.appendChild(patternItem);
+    
+  }
+}
+console.log(width, height);
+buildPattern(250); 
+
+
+
+
+js
