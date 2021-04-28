@@ -1,0 +1,244 @@
+<div class="buttons">
+  <button id="clear">Clear</button>
+  <button id="random">Randomize</button>
+  <button id="hide">Hide Grid</button>
+</div>
+
+<div class="instructions">
+  <ul>
+    <li>mouse right up/down <span>ZOOM-IN-OUT</span></li>
+    <li>mouse right left/right <span>PAN-LEFT-RIGHT</span></li>
+    <li>mouse up/down <span>ROTATE-UP-DOWN</span></li>
+    <li>mouse left/right <span>ROTATE-LEFT-RIGHT</span></li>
+  </ul>
+</div>
+
+
+
+
+html
+
+
+
+
+:root {
+  --primary: #ff44e6;
+  --secondary: #e8e800;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--secondary);
+}
+
+button {
+  outline: none;
+  padding: 5px 10px;
+  background: var(--secondary);
+  text-transform: uppercase;
+  font-family: "Source Code Pro", serif;
+  font-size: 12px;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  z-index: 1;
+}
+
+.instructions {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  padding: 1.5em;
+  font-family: "Source Code Pro", serif;
+}
+.instructions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  opacity: 0.2;
+  transition: 0.3s;
+}
+.instructions ul li {
+  font-size: 0.8rem;
+  padding: 3px 0px 3px 0px;
+}
+.instructions ul:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.instructions ul li span {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+
+
+
+css
+
+
+
+
+let cols;
+let rows;
+let grid;
+let gridBuffer;
+let w;
+let h;
+let boxSize;
+let clearBtn;
+let randomBtn;
+let hideBtn;
+let canvas;
+
+let aliveCol = "#EF3ED8";
+let aliveStr = "#CC00B0";
+let deadCol = "#E8E800";
+let deadStr = "#FFFF3D";
+let gridCol;
+
+function setup() {
+  w = 1080;
+  h = 800;
+  canvas = createCanvas(w, h, WEBGL);
+  frameRate(5);
+
+  clearBtn = select("#clear");
+  clearBtn.mousePressed(clearGrid);
+
+  randomBtn = select("#random");
+  randomBtn.mousePressed(randomize);
+
+  hideBtn = select("#hide");
+  hideBtn.mousePressed(hideGrid);
+
+  gridCol = false;
+
+  boxSize = 30;
+
+  setupGrid();
+  randomize();
+}
+
+function createGrid() {
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      let z = 0;
+      if (grid[i][j] == 1) {
+        fill(aliveCol);
+        stroke(aliveStr);
+        z = boxSize;
+      } else {
+        fill(deadCol);
+        if (gridCol) {
+          stroke(deadCol);
+          hideBtn.html("Show Grid");
+        } else {
+          hideBtn.html("Hide Grid");
+          stroke(deadStr);
+        }
+      }
+
+      push();
+      translate(i * boxSize, j * boxSize, z);
+      box(boxSize);
+      pop();
+    }
+  }
+}
+
+function generate() {
+  for (let x = 1; x < cols - 1; x++) {
+    for (let y = 1; y < rows - 1; y++) {
+      let adjacent = 0;
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          adjacent += grid[x + i][y + j];
+        }
+      }
+
+      adjacent -= grid[x][y];
+
+      // Rules
+      if (grid[x][y] == 1 && adjacent < 2) gridBuffer[x][y] = 0;
+      else if (grid[x][y] == 1 && adjacent > 3) gridBuffer[x][y] = 0;
+      else if (grid[x][y] == 0 && adjacent == 3) gridBuffer[x][y] = 1;
+      else gridBuffer[x][y] = grid[x][y];
+    }
+  }
+  let temp = grid;
+  grid = gridBuffer;
+  gridBuffer = temp;
+}
+
+function randomize() {
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      if (i == 0 || j == 0 || i == cols - 1 || j == rows - 1) grid[i][j] = 0;
+      else grid[i][j] = floor(random(2));
+      gridBuffer[i][j] = 0;
+    }
+  }
+}
+
+function setupGrid() {
+  cols = floor(w / boxSize);
+  rows = floor(h / boxSize);
+
+  grid = new Array(cols);
+  for (let i = 0; i < cols; i++) {
+    grid[i] = new Array(rows);
+  }
+
+  gridBuffer = new Array(cols);
+  for (let i = 0; i < cols; i++) {
+    gridBuffer[i] = new Array(rows);
+  }
+}
+
+function draw() {
+  background("#E8E800");
+  orbitControl();
+
+  rotateX(0.3);
+  rotateY(0.4);
+  translate(-300, -500, -200);
+
+  createGrid();
+  generate();
+}
+
+function clearGrid() {
+  setupGrid();
+}
+
+function hideGrid() {
+  gridCol = !gridCol;
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+
+
+
+js
